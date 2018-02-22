@@ -1,23 +1,53 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 	<body>
 		<h1>My First Heading</h1>
 		<p>My first paragraph.</p>
 
-		<div id="target"></div>
+		<div id="target" class="">
+			<script id="template" type="text/ractive">
+				<table class="container-fluid">
+					<tr>
+						<th>Classmates name</th>
+						<th>Age</th>
+						<th>Are they a minor?</th>
+					</tr>
+
+					{{#each people}}
+					<tr>
+						<td style="text-align: center">{{name}}</td>
+						<td>{{age}}</td>
+						<td>{{isMinor}}</td>
+						<td><label><input type='text' name='{{name}}' value='red' unchecked> red</label></td>
+					</tr>
+					{{/each}}
+				</table>
+			</script>
+		</div>
 
 		<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
 
-		<script id="template" type="text/ractive">
-			<p>{{greeting}}, {{name}}!</p>
-		</script>
-
-		<script>
-			var ractive = new Ractive({
-				target: '#target',
-				template: '#template',
-				data: { greeting: 'Goodbye', name: 'Earth' }
-			});
-		</script>
+	
+	<script>
+	
+		var people = [
+			{ name: "Tori", age: 25, isMinor: false },
+			{ name: "Starla", age: 26, isMinor: false },
+			{ name: "Clay", age: 22, isMinor: false },
+			{ name: "Jack", age: 27, isMinor: false }
+		];
+		var ractive = new Ractive({
+			target: '#target',
+			template: '#template',
+			data: {  people: people }
+		});
+	</script>
 	</body>
 </html>
